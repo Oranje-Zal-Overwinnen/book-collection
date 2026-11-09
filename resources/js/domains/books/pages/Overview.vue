@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getAllBooks, fetchBooks } from '../store';
+import { getAllBooks, fetchBooks, deleteBook } from '../store';
 
 fetchBooks();
 </script>
@@ -17,7 +17,10 @@ fetchBooks();
             <tr v-for="book in getAllBooks" :key="book.id">
                 <td>{{ book.title }}</td>
                 <td>{{ book.summary }}</td>
-                <td><RouterLink :to="{ name: 'books.edit', params: { id: book.id } }">Bewerk</RouterLink></td>
+                <td>
+                    <RouterLink :to="{ name: 'books.edit', params: { id: book.id } }">Bewerk</RouterLink>
+                    <button @click="deleteBook(book.id)">Verwijder</button>
+                </td>
             </tr>
         </tbody>
     </table>
