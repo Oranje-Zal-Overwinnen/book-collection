@@ -13,3 +13,9 @@ export const fetchBooks = async () => {
     if (!res) return;
     books.value = res.data;
 };
+
+export const createBook = async (newBook) => {
+    const {data} = await axios.post('/api/books', newBook);
+    if(!data) return
+    books.value = data;
+};
