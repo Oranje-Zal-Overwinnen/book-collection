@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { authorRoutes } from '../domains/authors/routes';
 import { bookRoutes } from '../domains/books/routes';
 
 export const router = createRouter({
     history: createWebHistory(),
-    routes: [...bookRoutes],
+    routes: [...authorRoutes, ...bookRoutes],
 });
