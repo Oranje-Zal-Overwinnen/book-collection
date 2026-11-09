@@ -11,5 +11,6 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/books', [BookController::class, 'index']);
 Route::post('/books', [BookController::class, 'store']);
+Route::put('/books/{book}', [BookController::class, 'update']);
 
 Route::get('/authors', [AuthorController::class, 'index']);
