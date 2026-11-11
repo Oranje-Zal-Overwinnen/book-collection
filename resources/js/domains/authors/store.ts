@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { getRequest, postRequest, deleteRequest, putRequest } from '@/services/http';
 import { ref, computed } from 'vue';
 
 // state
@@ -10,30 +10,24 @@ export const getAuthorById = (id) => computed(() => authors.value.find(author =>
 
 // actions
 export const fetchAuthors = async () => {
-    const { data: res } = await axios.get('/api/authors');
+    const { data: res } = await getRequest('/authors');
     if (!res) return;
     authors.value = res.data;
 };
 
 export const createAuthor = async (newAuthor) => {
-    const {data} = await axios.post('/api/authors', newAuthor);
+    const {data} = await postRequest('/authors', newAuthor);
     if(!data) return
     authors.value = data;
 };
 
 export const updateAuthor = async (id, updatedAuthor) => {
-    const { data } = await axios.put(`/api/authors/${id}`, updatedAuthor);
+    const { data } = await putRequest(`/authors/${id}`, updatedAuthor);
     if (!data) return;
     authors.value = data;
 };
 
 export const deleteAuthor = async (id) => {
-    try {
-        await axios.delete(`/api/authors/${id}`);
-        authors.value = authors.value.filter(author => author.id !== id);
-        return { success: true };
-    } catch (error) {
-        console.error("Failed to delete author:", error);
-        return { success: false, error };
-    }
+    await deleteRequest(`/authors/${id}`);
+    authors.value = authors.value.filter(author => author.id !== id);
 };
