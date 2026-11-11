@@ -6,6 +6,7 @@ const authors = ref([]);
 
 // getters
 export const getAllAuthors = computed(() => authors.value);
+export const getAuthorById = (id) => computed(() => authors.value.find(author => author.id == id));
 
 // actions
 export const fetchAuthors = async () => {
@@ -27,6 +28,12 @@ export const updateAuthor = async (id, updatedAuthor) => {
 };
 
 export const deleteAuthor = async (id) => {
-    await axios.delete(`/api/authors/${id}`);
-    authors.value = authros.value.filter(author => author.id !== id);
+    try {
+        await axios.delete(`/api/authors/${id}`);
+        authors.value = authors.value.filter(author => author.id !== id);
+        return { success: true };
+    } catch (error) {
+        console.error("Failed to delete author:", error);
+        return { success: false, error };
+    }
 };

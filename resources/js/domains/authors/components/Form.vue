@@ -2,7 +2,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const props = defineProps({ book: Object });
+const props = defineProps({ author: Object });
 
 const emit = defineEmits(['submit']);
 

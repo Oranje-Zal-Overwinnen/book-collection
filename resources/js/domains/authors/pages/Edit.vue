@@ -1,10 +1,12 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
-import { updateAuthor } from '../store';
+import { updateAuthor, getAuthorById, fetchAuthors } from '../store';
 
 const route = useRoute();
 const router = useRouter();
+
+fetchAuthors();
 
 const author = getAuthorById(route.params.id);
 
