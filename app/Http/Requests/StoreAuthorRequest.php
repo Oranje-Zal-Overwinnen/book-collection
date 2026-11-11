@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
-class StoreAuthorRequest extends FormRequest
+class StoreAuthorRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

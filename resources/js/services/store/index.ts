@@ -40,8 +40,12 @@ export const storeModuleFactory = <T extends { id: number }>(moduleName: string)
             setters.setAll(req.data);
         },
         delete: async (id: number) => {
-            await deleteRequest(`${moduleName}/${id}`);
-            setters.deleteById(id);
+            try {
+                await deleteRequest(`${moduleName}/${id}`);
+                setters.deleteById(id);
+            } catch (error) {
+                return;
+            }
         }
     };
 

@@ -6,7 +6,11 @@ const emit = defineEmits(['submit']);
 
 const form = ref({ ...props.book });
 
-const authors = computed(() => authorStore.getAll);
+const authors = authorStore.getters.all;
+
+onMounted(async () => {
+    await authorStore.actions.getAll();
+});
 
 const handleSubmit = () => emit('submit', form.value);
 </script>
