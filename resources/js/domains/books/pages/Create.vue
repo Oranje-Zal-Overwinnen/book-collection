@@ -1,8 +1,8 @@
 <script setup>
 import Form from '../components/Form.vue';
-import { createBook } from '../store';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { bookStore } from '@/domains/books/store';
 
 const router = useRouter();
 
@@ -10,12 +10,13 @@ const book = ref({
     title: '',
     summary: '',
     author_id: null,
-    isbn: ''
+    isbn: '',
+    published_date: ''
 });
 
 const handleSubmit = async (data) => {
-    await createBook(data);
-    router.push({name: 'books.overview'});
+    await bookStore.create(data);
+    router.push({ name: 'books.overview' });
 };
 </script>
 

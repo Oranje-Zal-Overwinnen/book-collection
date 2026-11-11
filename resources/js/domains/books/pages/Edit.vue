@@ -1,17 +1,17 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
-import { fetchBooks, getBookById, updateBook } from '../store';
+import { bookStore } from '@/domains/books/store';
 
 const route = useRoute();
 const router = useRouter();
 
-fetchBooks();
+bookStore.actions.getAll();
 
-const book = getBookById(route.params.id);
+const book = bookStore.getters.getById(Number(route.params.id));
 
 const handleSubmit = async (data) => {
-    await updateBook(route.params.id, data);
+    await bookStore.actions.update(Number(route.params.id), data);
     router.push({ name: 'books.overview' });
 };
 </script>

@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { getAllBooks, fetchBooks, deleteBook } from '../store';
+import { bookStore } from '@/domains/books/store';
 
-fetchBooks();
+bookStore.actions.getAll();
+
+const books = bookStore.getters.all;
+
+const deleteBook = async (id: number) => {
+    await bookStore.actions.delete(id);
+};
 </script>
 
 <template>
@@ -14,7 +20,7 @@ fetchBooks();
             </tr>
         </thead>
         <tbody>
-            <tr v-for="book in getAllBooks" :key="book.id">
+            <tr v-for="book in books" :key="book.id">
                 <td>{{ book.title }}</td>
                 <td>{{ book.summary }}</td>
                 <td>

@@ -1,15 +1,12 @@
 <script setup>
-import { ref } from 'vue';
-import { fetchAuthors, getAllAuthors } from '../../authors/store';
-
-// Fetch authors when component is mounted
-fetchAuthors();
-
+import { ref, computed, onMounted } from 'vue';
+import { authorStore } from '@/domains/authors/store';
 const props = defineProps({ book: Object });
-
 const emit = defineEmits(['submit']);
 
 const form = ref({ ...props.book });
+
+const authors = computed(() => authorStore.getAll);
 
 const handleSubmit = () => emit('submit', form.value);
 </script>
@@ -24,7 +21,7 @@ const handleSubmit = () => emit('submit', form.value);
 
         <label>Auteur:</label>
         <select v-model="form.author_id" required>
-            <option v-for="author in getAllAuthors" :key="author.id" :value="author.id">
+            <option v-for="author in authors" :key="author.id" :value="author.id">
                 {{ author.name }}
             </option>
         </select>
@@ -32,7 +29,9 @@ const handleSubmit = () => emit('submit', form.value);
         <label>ISBN (10)</label>
         <input v-model="form.isbn" type="text" required />
 
+        <label>Publicatiedatum:</label>
+        <input v-model="form.published_date" type="date" required />
+
         <button type="submit">Opslaan</button>
     </form>
 </template>
-

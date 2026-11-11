@@ -1,17 +1,17 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import Form from '../components/Form.vue';
-import { updateAuthor, getAuthorById, fetchAuthors } from '../store';
+import { authorStore } from '@/domains/authors/store';
 
 const route = useRoute();
 const router = useRouter();
 
-fetchAuthors();
+authorStore.actions.getAll();
 
-const author = getAuthorById(route.params.id);
+const author = authorStore.getters.getById(Number(route.params.id));
 
 const handleSubmit = async (data) => {
-    await updateAuthor(route.params.id, data);
+    await authorStore.actions.update(Number(route.params.id), data);
     router.push({ name: 'authors.overview' });
 };
 </script>

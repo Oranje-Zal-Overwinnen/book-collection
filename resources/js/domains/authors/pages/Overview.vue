@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { getAllAuthors, fetchAuthors, deleteAuthor } from '../store';
+import { authorStore } from '@/domains/authors/store';
 
-fetchAuthors();
+authorStore.actions.getAll();
+
+const authors = authorStore.getters.all;
+const deleteAuthor = authorStore.actions.delete;
 </script>
 
 <template>
@@ -13,7 +16,7 @@ fetchAuthors();
             </tr>
         </thead>
         <tbody>
-            <tr v-for="author in getAllAuthors" :key="author.id">
+            <tr v-for="author in authors" :key="author.id">
                 <td>{{ author.name }}</td>
                 <td>
                     <RouterLink :to="{ name: 'authors.edit', params: { id: author.id } }">Bewerk</RouterLink>

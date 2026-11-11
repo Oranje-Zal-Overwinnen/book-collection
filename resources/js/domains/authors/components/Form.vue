@@ -1,9 +1,7 @@
-
 <script setup>
 import { ref } from 'vue';
 
 const props = defineProps({ author: Object });
-
 const emit = defineEmits(['submit']);
 
 const form = ref({ ...props.author });
@@ -19,4 +17,3 @@ const handleSubmit = () => emit('submit', form.value);
         <button type="submit">Opslaan</button>
     </form>
 </template>
-

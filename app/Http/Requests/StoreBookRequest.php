@@ -27,6 +27,7 @@ class StoreBookRequest extends FormRequest
             'summary' => 'required|string',
             'author_id' => 'required|exists:authors,id',
             'isbn' => 'required|string',
+            'published_date' => 'required|date',
         ];
     }
 }

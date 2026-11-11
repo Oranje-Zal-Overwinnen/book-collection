@@ -1,20 +1,21 @@
 <script setup>
 import Form from '../components/Form.vue';
-import { createAuthor } from '../store';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { authorStore } from '@/domains/authors/store';
 
 const router = useRouter();
 
-const book = ref({
+const author = ref({
     name: '',
 });
 
 const handleSubmit = async (data) => {
-    await createAuthor(data);
-    router.push({name: 'authors.overview'});
+    await authorStore.actions.create(data);
+    router.push({ name: 'authors.overview' });
 };
 </script>
+
 
 <template>
     <div>
