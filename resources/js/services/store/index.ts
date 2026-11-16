@@ -24,8 +24,8 @@ export const storeModuleFactory = <T extends { id: number }>(moduleName: string)
     };
 
     const actions = {
-        getAll: async () => {
-            const { data: res } = await getRequest(moduleName);
+        getAll: async (params?: Record<string, unknown>) => {
+            const { data: res } = await getRequest(moduleName, params ? { params } : undefined);
             if (!res) return;
             setters.setAll(res.data);
         },
@@ -39,12 +39,13 @@ export const storeModuleFactory = <T extends { id: number }>(moduleName: string)
             if (!req) return;
             setters.setAll(req.data);
         },
-        delete: async (id: number) => {
+        delete: async (id: number, params?: Record<string, unknown>) => {
             try {
-                await deleteRequest(`${moduleName}/${id}`);
+                await deleteRequest(`${moduleName}/${id}`, params ? { params } : undefined);
                 setters.deleteById(id);
+                return true;
             } catch (error) {
-                return;
+                return false;
             }
         }
     };

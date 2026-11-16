@@ -2,17 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['user_id', 'book_id', 'title', 'description', 'published_date'])]
 class Review extends Model
 {
     use HasFactory;
 
-    public function reviewee(): BelongsTo
+    protected $fillable = ['book_id', 'user_id', 'rating', 'comment'];
+
+    protected function casts(): array
     {
-        return $this->belongsTo(User::class);
+        return [
+            'rating' => 'integer',
+        ];
+    }
+
+    public function reviewer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function book(): BelongsTo

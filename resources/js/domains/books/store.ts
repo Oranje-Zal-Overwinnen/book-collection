@@ -6,7 +6,8 @@ interface Book {
     summary: string;
     author_id: number;
     isbn: string;
-    published_date: date,
+    published_date: string;
+    reviews_count?: number;
 }
 
 export const bookStore = storeModuleFactory<Book>('books');

@@ -15,7 +15,7 @@ const book = ref({
 });
 
 const handleSubmit = async (data) => {
-    await bookStore.create(data);
+    await bookStore.actions.create(data);
     router.push({ name: 'books.overview' });
 };
 </script>

@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         Author::factory(10)
             ->has(
                 Book::factory(3)
-                    ->has(Review::factory(2))
+                    ->has(Review::factory(7))
             )
             ->create();
     }

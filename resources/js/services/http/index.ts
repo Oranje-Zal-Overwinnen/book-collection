@@ -30,7 +30,7 @@ http.interceptors.response.use(
     }
 );
 
-export const getRequest = (endpoint) => http.get(endpoint);
+export const getRequest = (endpoint, config?) => http.get(endpoint, config);
 export const postRequest = (endpoint, data) => http.post(endpoint, data);
 export const putRequest = (endpoint, data) => http.put(endpoint, data);
-export const deleteRequest = (endpoint) => http.delete(endpoint);
+export const deleteRequest = (endpoint, config?) => http.delete(endpoint, config);
